@@ -20,8 +20,7 @@ action :generate do
     '#services' => new_resource.services
   }
 
-  services_yml = services.to_yaml(:indentation => 2).gsub(/(! )?['"]#services['"]:/, '#services:').gsub('---', '').gsub(%r{!(ruby\/|map|seq)[a-zA-Z0-9:]*}, '')
-
+  services_yml = services.to_yaml(:indentation => 2).gsub(/(! )?['"]#services['"]:/, '#services:').gsub('---', '').gsub(%r{!(ruby\/|map|seq)[a-zA-Z0-9:]*}, '').gsub('\'','')
   t = template new_resource.cfg_file do
     cookbook new_resource.template_cookbook
     source new_resource.template_source
